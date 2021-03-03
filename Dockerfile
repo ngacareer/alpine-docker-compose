@@ -15,6 +15,9 @@ LABEL maintainer="triuhv <ms@ngacareer.com>" \
     alpine-version="3.13" \
     build="03-Mar-2021"
 
+RUN apk upgrade --no-cache --update && \
+    apk add py-pip
+
 ENV DOCKER_VERSION ${DOCKER_VERSION:-20.10.3}
 
 RUN curl -o docker.tgz -L \
@@ -30,6 +33,8 @@ RUN set -eux; \
 	\
 	dockerd --version; \
 	docker --version
+	
+RUN pip install docker-compose	&& docker-compose -v
 
 COPY modprobe.sh /usr/local/bin/modprobe 
 COPY docker-entrypoint.sh /usr/local/bin/ 
