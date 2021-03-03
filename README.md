@@ -15,7 +15,10 @@ Base from <a href="https://hub.docker.com/_/docker">docker</a>. The image is a L
 ## How to use this image
 - On Docker 
 ```
-docker run -itd --name alpine-docker-compose -v /var/run/docker.sock:/var/run/docker.sock ngacareer/alpine-docker-compose
+docker run -itd --name alpine-docker-compose \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     ngacareer/alpine-docker-compose
+     
 docker exec -it alpine-docker-compose sh
 # dockerd --version
 # docker --version
@@ -23,7 +26,10 @@ docker exec -it alpine-docker-compose sh
  ```
 - On Kubernetes
  ```
-kubectl run alpine-docker-compose -v /var/run/docker.sock:/var/run/docker.sock --image=ngacareer/alpine-docker-compose
+kubectl run alpine-docker-compose \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       --image=ngacareer/alpine-docker-compose
+       
 kubectl exec -it pod/alpine-docker-compose sh
 # dockerd --version
 # docker --version
@@ -31,7 +37,10 @@ kubectl exec -it pod/alpine-docker-compose sh
  ```
 - On OpenShift
  ```
-oc new-app --docker-image=ngacareer/alpine-docker-compose -v /var/run/docker.sock:/var/run/docker.sock --name=alpine-docker-compose
+oc new-app --docker-image=ngacareer/alpine-docker-compose \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       --name=alpine-docker-compose
+       
 oc new-app --docker-image=ngacareer/testtools:noroot --name=testtools
 oc exec -it $(oc get pod -l app=testtools -o jsonpath="{.items[0].metadata.name}") sh
 # dockerd --version
